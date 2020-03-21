@@ -3,36 +3,53 @@
     :headers="headers"
     :items="users"
     item-key="id"
+    show-select
+    single-select
     :loading="isLoading"
     loading-text="Carregando..."
     :search="search"
     class="user-list"
+    v-model="selectedRow"
   >
-    <template v-slot:body="{ items }">
-      <tbody>
-        <tr v-for="item in items" :key="item.id">
-          <td class="item-check">
-            <input type="checkbox" />
-          </td>
-          <td class="item-user">{{ item.user }}</td>
-          <td class="item-email">{{ item.email }}</td>
-          <td class="item-inclusion-date">{{ item.inclusionDate }}</td>
-          <td class="item-change-date">{{ item.changeDate }}</td>
-          <td class="item-rules">{{ item.rules }}</td>
-          <td class="item-status">
-            {{ item.status ? 'ATIVO' : 'INATIVO' }}
-          </td>
-          <td class="px-0 item-btn-acoes">
-            <v-icon size="20" color="#666666" class="mr-3">mdi-delete</v-icon>
-            <v-icon size="20" color="#666666" class="mr-3">mdi-package-down</v-icon>
-            <v-icon size="20" color="#666666" class="mr-3">mdi-security</v-icon>
-            <v-icon size="20" color="#666666">mdi-pencil</v-icon>
-          </td>
-          <td class="item-acoes">
-            <v-icon size="20" color="#666666">mdi-dots-horizontal</v-icon>
-          </td>
-        </tr>
-      </tbody>
+    <template v-slot:item.status="{ item }">
+      <span class="item-status">{{ item.status ? 'ATIVO' : 'INATIVO' }}</span>
+    </template>
+    <template v-slot:item.btnAcoes>
+      <div class="item-btn-acoes mx-n3">
+        <v-icon
+          size="20"
+          color="#666666"
+          class="mr-3"
+          @click.prevent="resetActions"
+        >mdi-delete</v-icon>
+        <v-icon
+          size="20"
+          color="#666666"
+          class="mr-3"
+          @click.prevent="resetActions"
+        >mdi-package-down</v-icon>
+        <v-icon
+          size="20"
+          color="#666666"
+          class="mr-3"
+          @click.prevent="resetActions"
+        >mdi-security</v-icon>
+        <v-icon
+          size="20"
+          color="#666666"
+          @click.prevent="resetActions"
+        >mdi-pencil</v-icon>
+      </div>
+    </template>
+    <template v-slot:item.acoes="{ item }">
+      <v-icon
+        size="20"
+        color="#666666"
+        class="item-acoes"
+        @click.prevent="selectedRow = [item]"
+      >
+        mdi-dots-horizontal
+      </v-icon>
     </template>
   </v-data-table>
 </template>
@@ -45,7 +62,7 @@ export default {
 
   data: () => ({
     headers: [
-      { text: '', value: 'check' },
+      { text: '', value: '', sortable: false },
       { text: 'USUÁRIO', value: 'user' },
       { text: 'EMAIL', value: 'email' },
       {
@@ -75,6 +92,7 @@ export default {
       {
         text: '',
         value: 'btnAcoes',
+        align: 'end',
         sortable: false,
         width: 150,
       },
@@ -86,6 +104,7 @@ export default {
         width: 70,
       },
     ],
+    selectedRow: [],
   }),
 
   mounted() {
@@ -106,6 +125,12 @@ export default {
       return this.$store.state.users.usersLoadStatus === CONST.LOAD_STATUS.ERROR;
     },
   },
+
+  methods: {
+    resetActions() {
+      this.selectedRow = [];
+    },
+  },
 };
 </script>
 
@@ -124,23 +149,21 @@ export default {
       td {
         border-bottom: 0 !important;
 
-        &.item-inclusion-date,
-        &.item-change-date,
-        &.item-rules,
-        &.item-status,
-        &.item-acoes {
-          text-align: center;
-        }
-
-        &.item-check {
-          > input {
-            background-color: #fff;
-          }
-        }
-
-        &.item-status {
+        .item-status {
           color: #31BA1F;
           font-weight: 500;
+        }
+
+        .item-acoes {
+          cursor: pointer;
+        }
+
+        .item-btn-acoes {
+          display: none;
+
+          .v-icon {
+            cursor: pointer;
+          }
         }
 
         .v-data-table__checkbox .v-icon {
@@ -163,6 +186,25 @@ export default {
 
       &:nth-child(odd) {
         background-color: #F5F5F5;
+      }
+
+      &.v-data-table__selected,
+      &.v-data-table__selected:hover {
+        background-color: #fff !important;
+        color: #E9E9E9;
+
+        > td {
+          border-bottom: 2px solid #D83367 !important;
+
+          > .item-status,
+          > .item-acoes {
+            color: #E9E9E9 !important;
+          }
+
+          > .item-btn-acoes {
+            display: block;
+          }
+        }
       }
     }
   }
