@@ -22,36 +22,36 @@
       <template v-slot:item.btnAcoes>
         <div class="item-btn-acoes mx-n3">
           <v-icon
-            size="20"
-            color="#666666"
-            class="mr-3"
             @click.prevent="resetActions"
+            class="mr-3"
+            color="#666666"
+            size="20"
           >mdi-delete</v-icon>
           <v-icon
-            size="20"
-            color="#666666"
-            class="mr-3"
             @click.prevent="resetActions"
+            class="mr-3"
+            color="#666666"
+            size="20"
           >mdi-package-down</v-icon>
           <v-icon
-            size="20"
-            color="#666666"
-            class="mr-3"
             @click.prevent="resetActions"
+            class="mr-3"
+            color="#666666"
+            size="20"
           >mdi-security</v-icon>
           <v-icon
-            size="20"
-            color="#666666"
             @click.prevent="resetActions"
+            color="#666666"
+            size="20"
           >mdi-pencil</v-icon>
         </div>
       </template>
       <template v-slot:item.acoes="{ item }">
         <v-icon
-          size="20"
-          color="#666666"
-          class="item-acoes"
           @click.prevent="selectedRow = [item]"
+          class="item-acoes"
+          color="#666666"
+          size="20"
         >
           mdi-dots-horizontal
         </v-icon>
@@ -78,47 +78,47 @@ export default {
       { text: 'USUÁRIO', value: 'user' },
       { text: 'EMAIL', value: 'email' },
       {
+        align: 'center',
+        sortable: false,
         text: 'DATA DE INCLUSÃO',
         value: 'inclusionDate',
-        align: 'center',
-        sortable: false,
       },
       {
+        align: 'center',
+        sortable: false,
         text: 'DATA DE ALTERAÇÃO',
         value: 'changeDate',
-        align: 'center',
-        sortable: false,
       },
       {
+        align: 'center',
+        sortable: false,
         text: 'REGRAS',
         value: 'rules',
-        align: 'center',
-        sortable: false,
       },
       {
+        align: 'center',
+        sortable: false,
         text: 'STATUS',
         value: 'status',
-        align: 'center',
-        sortable: false,
       },
       {
-        text: '',
-        value: 'btnAcoes',
         align: 'end',
         sortable: false,
+        text: '',
+        value: 'btnAcoes',
         width: 150,
       },
       {
-        text: 'AÇÕES',
-        value: 'acoes',
         align: 'center',
         sortable: false,
+        text: 'AÇÕES',
+        value: 'acoes',
         width: 70,
       },
     ],
-    selectedRow: [],
     page: 1,
     pageCount: 0,
+    selectedRow: [],
   }),
 
   mounted() {
@@ -126,17 +126,17 @@ export default {
   },
 
   computed: {
-    users() {
-      return this.$store.state.users.users;
-    },
-    search() {
-      return this.$store.state.users.search;
+    hasError() {
+      return this.$store.state.users.usersLoadStatus === CONST.LOAD_STATUS.ERROR;
     },
     isLoading() {
       return this.$store.state.users.usersLoadStatus === CONST.LOAD_STATUS.LOADING;
     },
-    hasError() {
-      return this.$store.state.users.usersLoadStatus === CONST.LOAD_STATUS.ERROR;
+    search() {
+      return this.$store.state.users.search;
+    },
+    users() {
+      return this.$store.state.users.users;
     },
   },
 
