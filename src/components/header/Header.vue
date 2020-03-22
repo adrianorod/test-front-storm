@@ -1,30 +1,47 @@
 <template>
-  <v-app-bar app class="header" height="96">
-    <v-container fluid class="px-6">
-      <v-row class="d-flex justify-space-between">
-        <v-col cols="12" md="3">
-          <v-text-field
-            class="search-input"
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Pesquisar..."
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-col>
-        <v-btn class="mx-2 px-0" color="#ffffff" width="48" height="48" min-width="0">
-          <v-icon size="20" color="#666666">mdi-tune</v-icon>
-        </v-btn>
-      </v-row>
-    </v-container>
-  </v-app-bar>
+  <div>
+    <v-app-bar app class="header" height="96">
+      <v-container fluid class="px-6">
+        <v-row class="d-flex justify-space-between">
+          <v-col cols="12" md="3">
+            <v-text-field
+              class="search-input"
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Pesquisar..."
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-col>
+          <v-btn
+            @click.prevent="isFilterOpened = true"
+            class="mx-2 px-0"
+            color="#ffffff"
+            height="48"
+            min-width="0"
+            width="48"
+          >
+            <v-icon size="20" color="#666666">mdi-tune</v-icon>
+          </v-btn>
+        </v-row>
+      </v-container>
+    </v-app-bar>
+    <FilterNav :is-opened="isFilterOpened"/>
+  </div>
 </template>
 
 <script>
+import FilterNav from '../filter-nav/FilterNav.vue';
+
 export default {
   name: 'Header',
 
+  components: {
+    FilterNav,
+  },
+
   data: () => ({
+    isFilterOpened: false,
   }),
 
   computed: {

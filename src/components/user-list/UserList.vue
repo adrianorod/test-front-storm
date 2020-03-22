@@ -3,7 +3,7 @@
     <v-data-table
       :headers="headers"
       :items-per-page="6"
-      :items="users"
+      :items="list"
       :loading="isLoading"
       :page.sync="page"
       :search="search"
@@ -62,81 +62,30 @@
 </template>
 
 <script>
-import CONST from '../../utils/constants';
 import Pagination from '../pagination/Pagination.vue';
 
 export default {
   name: 'UserList',
+
+  props: {
+    headers: Array,
+    isLoading: Boolean,
+    list: Array,
+  },
 
   components: {
     Pagination,
   },
 
   data: () => ({
-    headers: [
-      { text: '', value: '', sortable: false },
-      { text: 'USUÁRIO', value: 'user' },
-      { text: 'EMAIL', value: 'email' },
-      {
-        align: 'center',
-        sortable: false,
-        text: 'DATA DE INCLUSÃO',
-        value: 'inclusionDate',
-      },
-      {
-        align: 'center',
-        sortable: false,
-        text: 'DATA DE ALTERAÇÃO',
-        value: 'changeDate',
-      },
-      {
-        align: 'center',
-        sortable: false,
-        text: 'REGRAS',
-        value: 'rules',
-      },
-      {
-        align: 'center',
-        sortable: false,
-        text: 'STATUS',
-        value: 'status',
-      },
-      {
-        align: 'end',
-        sortable: false,
-        text: '',
-        value: 'btnAcoes',
-        width: 150,
-      },
-      {
-        align: 'center',
-        sortable: false,
-        text: 'AÇÕES',
-        value: 'acoes',
-        width: 70,
-      },
-    ],
     page: 1,
     pageCount: 0,
     selectedRow: [],
   }),
 
-  mounted() {
-    this.$store.dispatch('users/loadUsers');
-  },
-
   computed: {
-    hasError() {
-      return this.$store.state.users.usersLoadStatus === CONST.LOAD_STATUS.ERROR;
-    },
-    isLoading() {
-      return this.$store.state.users.usersLoadStatus === CONST.LOAD_STATUS.LOADING;
-    },
     search() {
       return this.$store.state.users.search;
-    },
-    users() {
-      return this.$store.state.users.users;
     },
   },
 
