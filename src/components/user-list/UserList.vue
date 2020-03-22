@@ -1,64 +1,76 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="users"
-    item-key="id"
-    show-select
-    single-select
-    :loading="isLoading"
-    loading-text="Carregando..."
-    :search="search"
-    class="user-list"
-    v-model="selectedRow"
-  >
-    <template v-slot:item.status="{ item }">
-      <span class="item-status">{{ item.status ? 'ATIVO' : 'INATIVO' }}</span>
-    </template>
-    <template v-slot:item.btnAcoes>
-      <div class="item-btn-acoes mx-n3">
+  <div>
+    <v-data-table
+      :headers="headers"
+      :items-per-page="6"
+      :items="users"
+      :loading="isLoading"
+      :page.sync="page"
+      :search="search"
+      @page-count="pageCount = $event"
+      class="user-list"
+      hide-default-footer
+      item-key="id"
+      loading-text="Carregando..."
+      show-select
+      single-select
+      v-model="selectedRow"
+    >
+      <template v-slot:item.status="{ item }">
+        <span class="item-status">{{ item.status ? 'ATIVO' : 'INATIVO' }}</span>
+      </template>
+      <template v-slot:item.btnAcoes>
+        <div class="item-btn-acoes mx-n3">
+          <v-icon
+            size="20"
+            color="#666666"
+            class="mr-3"
+            @click.prevent="resetActions"
+          >mdi-delete</v-icon>
+          <v-icon
+            size="20"
+            color="#666666"
+            class="mr-3"
+            @click.prevent="resetActions"
+          >mdi-package-down</v-icon>
+          <v-icon
+            size="20"
+            color="#666666"
+            class="mr-3"
+            @click.prevent="resetActions"
+          >mdi-security</v-icon>
+          <v-icon
+            size="20"
+            color="#666666"
+            @click.prevent="resetActions"
+          >mdi-pencil</v-icon>
+        </div>
+      </template>
+      <template v-slot:item.acoes="{ item }">
         <v-icon
           size="20"
           color="#666666"
-          class="mr-3"
-          @click.prevent="resetActions"
-        >mdi-delete</v-icon>
-        <v-icon
-          size="20"
-          color="#666666"
-          class="mr-3"
-          @click.prevent="resetActions"
-        >mdi-package-down</v-icon>
-        <v-icon
-          size="20"
-          color="#666666"
-          class="mr-3"
-          @click.prevent="resetActions"
-        >mdi-security</v-icon>
-        <v-icon
-          size="20"
-          color="#666666"
-          @click.prevent="resetActions"
-        >mdi-pencil</v-icon>
-      </div>
-    </template>
-    <template v-slot:item.acoes="{ item }">
-      <v-icon
-        size="20"
-        color="#666666"
-        class="item-acoes"
-        @click.prevent="selectedRow = [item]"
-      >
-        mdi-dots-horizontal
-      </v-icon>
-    </template>
-  </v-data-table>
+          class="item-acoes"
+          @click.prevent="selectedRow = [item]"
+        >
+          mdi-dots-horizontal
+        </v-icon>
+      </template>
+    </v-data-table>
+    <Pagination :page="page" :page-count="pageCount" @update:page="page = $event" />
+  </div>
 </template>
 
 <script>
 import CONST from '../../utils/constants';
+import Pagination from '../pagination/Pagination.vue';
 
 export default {
   name: 'UserList',
+
+  components: {
+    Pagination,
+  },
 
   data: () => ({
     headers: [
@@ -105,6 +117,8 @@ export default {
       },
     ],
     selectedRow: [],
+    page: 1,
+    pageCount: 0,
   }),
 
   mounted() {
