@@ -21,12 +21,12 @@
             min-width="0"
             width="48"
           >
-            <v-icon size="20" color="#666666">mdi-tune</v-icon>
+            <v-icon size="20" color="#666">mdi-tune</v-icon>
           </v-btn>
         </v-row>
       </v-container>
     </v-app-bar>
-    <FilterNav :is-opened="isFilterOpened"/>
+    <FilterNav :is-opened="isFilterOpened" @update:is-opened="isFilterOpened = $event" />
   </div>
 </template>
 
