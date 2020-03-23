@@ -3,7 +3,7 @@
     <v-data-table
       :headers="headers"
       :items-per-page="6"
-      :items="list"
+      :items="filteredList"
       :loading="isLoading"
       :page.sync="page"
       :search="search"
@@ -86,6 +86,30 @@ export default {
   computed: {
     search() {
       return this.$store.state.users.search;
+    },
+    inclusionDateSearch() {
+      return this.$store.state.users.inclusionDateSearch;
+    },
+    changeDateSearch() {
+      return this.$store.state.users.changeDateSearch;
+    },
+    statusSearch() {
+      return this.$store.state.users.statusSearch;
+    },
+    filteredList() {
+      return this.list
+        .filter((item) => (
+          this.inclusionDateSearch.length <= 0
+          || this.inclusionDateSearch.some((date) => date === item.inclusionDate)
+        ))
+        .filter((item) => (
+          this.changeDateSearch.length <= 0
+          || this.changeDateSearch.some((date) => date === item.changeDate)
+        ))
+        .filter((item) => (
+          this.statusSearch.length <= 0
+          || this.statusSearch.some((date) => date === item.status)
+        ));
     },
   },
 

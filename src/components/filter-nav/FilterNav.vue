@@ -51,12 +51,12 @@
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <v-checkbox
-                    v-model="inclusionDateModel"
-                    v-for="(item,i) in inclusionDates"
                     :key="i"
                     :label="item"
                     :value="item"
                     color="#D83367"
+                    v-for="(item,i) in inclusionDates"
+                    v-model="inclusionDateModel"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -77,12 +77,12 @@
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <v-checkbox
-                    v-model="changeDateModel"
-                    v-for="(item,i) in changeDates"
                     :key="i"
                     :label="item"
                     :value="item"
                     color="#D83367"
+                    v-for="(item,i) in changeDates"
+                    v-model="changeDateModel"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -103,16 +103,29 @@
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <v-checkbox
-                    v-model="statusModel"
-                    v-for="(item,i) in status"
                     :key="i"
                     :label="item ? 'ATIVO' : 'INATIVO'"
                     :value="item"
                     color="#D83367"
+                    v-for="(item,i) in status"
+                    v-model="statusModel"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
+          </v-row>
+          <v-row class="px-4 mt-10">
+            <v-btn
+              :disabled="isBtnDisabled"
+              @click.prevent="updateFilterOptions"
+              color="#D83367"
+              depressed
+              height="65"
+              outlined
+              width="100%"
+            >
+              aplicar
+            </v-btn>
           </v-row>
         </v-container>
       </v-card-actions>
@@ -144,11 +157,24 @@ export default {
     status() {
       return this.$store.getters['users/status'];
     },
+    isBtnDisabled() {
+      return (
+        this.statusModel.length <= 0
+        && this.changeDateModel.length <= 0
+        && this.inclusionDateModel.length <= 0
+      );
+    },
   },
 
   methods: {
     updateIsOpened(state) {
       this.$emit('update:is-opened', state);
+    },
+    updateFilterOptions() {
+      this.$store.commit('users/setInclusionDateSearch', this.inclusionDateModel);
+      this.$store.commit('users/setChangeDateSearch', this.changeDateModel);
+      this.$store.commit('users/setStatusSearch', this.statusModel);
+      this.$emit('update:is-opened', false);
     },
   },
 };
@@ -186,6 +212,10 @@ export default {
 
           &:before {
             box-shadow: none;
+          }
+
+          &:after {
+            display: none;
           }
 
           &-header {

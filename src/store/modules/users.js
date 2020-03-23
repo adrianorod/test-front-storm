@@ -8,6 +8,9 @@ export default {
     users: [],
     usersLoadStatus: 0,
     search: '',
+    inclusionDateSearch: [],
+    changeDateSearch: [],
+    statusSearch: [],
   },
   actions: {
     async loadUsers({ commit }) {
@@ -31,6 +34,15 @@ export default {
     },
     setSearch(state, search) {
       state.search = search;
+    },
+    setInclusionDateSearch(state, inclusionDateSearch) {
+      state.inclusionDateSearch = inclusionDateSearch;
+    },
+    setChangeDateSearch(state, changeDateSearch) {
+      state.changeDateSearch = changeDateSearch;
+    },
+    setStatusSearch(state, statusSearch) {
+      state.statusSearch = statusSearch;
     },
   },
   getters: {
