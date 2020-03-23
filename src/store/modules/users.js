@@ -34,5 +34,14 @@ export default {
     },
   },
   getters: {
+    uniquePropValues: (state) => (key) => (
+      state.users
+        .map((user) => user[key])
+        .filter((user, index, arr) => arr.indexOf(user) === index)
+        .sort()
+    ),
+    inclusionDates: (state, getters) => getters.uniquePropValues('inclusionDate'),
+    changeDates: (state, getters) => getters.uniquePropValues('changeDate'),
+    status: (state, getters) => getters.uniquePropValues('status'),
   },
 };
