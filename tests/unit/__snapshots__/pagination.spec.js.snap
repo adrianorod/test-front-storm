@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination.vue should match snapshot 1`] = `
+<div class="text-center mt-6 pagination"><button type="button" disabled="disabled" class="v-btn v-btn--depressed v-btn--disabled theme--light v-size--default" style="min-height: 48px;" data-test="btn-first"><span class="v-btn__content">
+    Primeiro
+  </span></button> <button type="button" disabled="disabled" class="v-btn v-btn--depressed v-btn--disabled theme--light v-size--default" style="min-height: 48px;"><span class="v-btn__content">
+    Anterior
+  </span></button> <button type="button" class="v-btn v-btn--depressed theme--light v-size--default" style="min-height: 48px; min-width: 48px; background-color: rgb(216, 51, 103); border-color: #d83367;" data-test="btn-page"><span class="v-btn__content">
+    1
+  </span></button><button type="button" class="v-btn v-btn--depressed theme--light v-size--default" style="min-height: 48px; min-width: 48px; background-color: rgb(216, 51, 103); border-color: #d83367;" data-test="btn-page"><span class="v-btn__content">
+    2
+  </span></button><button type="button" class="v-btn v-btn--depressed theme--light v-size--default" style="min-height: 48px; min-width: 48px; background-color: rgb(216, 51, 103); border-color: #d83367;" data-test="btn-page"><span class="v-btn__content">
+    3
+  </span></button> <button type="button" class="v-btn v-btn--depressed theme--light v-size--default" style="min-height: 48px; background-color: rgb(216, 51, 103); border-color: #d83367;" data-test="btn-next"><span class="v-btn__content">
+    Próximo
+  </span></button> <button type="button" class="v-btn v-btn--depressed theme--light v-size--default" style="min-height: 48px; background-color: rgb(216, 51, 103); border-color: #d83367;"><span class="v-btn__content">
+    Último
+  </span></button></div>
+`;

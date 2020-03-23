@@ -4,6 +4,7 @@
       :disabled="page === 1"
       @click.prevent="updatePage(1)"
       color="#D83367"
+      data-test="btn-first"
       depressed
       min-height="48"
     >
@@ -23,6 +24,7 @@
       :key="item"
       @click.prevent="updatePage(item)"
       color="#D83367"
+      data-test="btn-page"
       depressed
       min-height="48"
       min-width="48"
@@ -35,6 +37,7 @@
       :disabled="page === pageCount"
       @click.prevent="updatePage(page + 1)"
       color="#D83367"
+      data-test="btn-next"
       depressed
       min-height="48"
     >
