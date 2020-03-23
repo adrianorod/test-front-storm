@@ -12,7 +12,7 @@
         "id": 1,
         "user": "CCHANG",
         "email": "ciro.chang@tvglobo.com.br",
-        "inclusionDate": "28/05/2019",
+        "inclusionDate": "29/05/2019",
         "changeDate": "30/05/2019",
         "rules": "01",
         "status": true
@@ -21,7 +21,7 @@
         "id": 2,
         "user": "TMARCAL",
         "email": "thiago.marcal@tvglobo.com.br",
-        "inclusionDate": "28/05/2019",
+        "inclusionDate": "29/05/2019",
         "changeDate": "30/05/2019",
         "rules": "01",
         "status": true
@@ -58,36 +58,36 @@
         "user": "USUÁRIO TESTE 097",
         "email": "teste@tvglobo.com.br",
         "inclusionDate": "28/05/2019",
-        "changeDate": "30/05/2019",
+        "changeDate": "01/06/2019",
         "rules": "02",
-        "status": true
+        "status": false
     },
     {
         "id": 7,
         "user": "USUÁRIO TESTE 312",
         "email": "teste@tvglobo.com.br",
-        "inclusionDate": "28/05/2019",
-        "changeDate": "30/05/2019",
+        "inclusionDate": "27/05/2019",
+        "changeDate": "01/06/2019",
         "rules": "02",
-        "status": true
+        "status": false
     },
     {
         "id": 8,
         "user": "USUÁRIO TESTE 567",
         "email": "teste@tvglobo.com.br",
         "inclusionDate": "28/05/2019",
-        "changeDate": "30/05/2019",
+        "changeDate": "01/06/2019",
         "rules": "02",
-        "status": true
+        "status": false
     },
     {
         "id": 9,
         "user": "USUÁRIO TESTE 123",
         "email": "teste@tvglobo.com.br",
         "inclusionDate": "28/05/2019",
-        "changeDate": "30/05/2019",
+        "changeDate": "01/06/2019",
         "rules": "02",
-        "status": true
+        "status": false
     },
     {
         "id": 10,
@@ -96,15 +96,15 @@
         "inclusionDate": "28/05/2019",
         "changeDate": "30/05/2019",
         "rules": "02",
-        "status": true
+        "status": false
     },
     {
         "id": 11,
         "user": "USUÁRIO TESTE 326",
         "email": "teste@tvglobo.com.br",
-        "inclusionDate": "28/05/2019",
+        "inclusionDate": "27/05/2019",
         "changeDate": "30/05/2019",
         "rules": "02",
-        "status": true
+        "status": false
     }
 ]
